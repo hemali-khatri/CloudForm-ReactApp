@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import { getUsers } from './services/UserService';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await getUsers();
+      setUsers(data);
+      setLoading(false);
+    };
+    fetchUsers();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1 className="title">Users List</h1>
+
+      {loading ? (
+        <div className="loading">
+          <p>Loading users...</p>
+        </div>
+      ) : (
+        <ul className="user-list">
+          {users.length > 0 ? (
+            users.map((user) => (
+              <li key={user.id} className="user-card">
+                <div className="user-info">
+                  <h3 className="user-name">{user.name}</h3>
+                  <p className="user-email">{user.email}</p>
+                </div>
+              </li>
+            ))
+          ) : (
+            <p>No users found</p>
+          )}
+        </ul>
+      )}
     </div>
   );
-}
+};
 
 export default App;
