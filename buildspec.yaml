@@ -8,5 +8,6 @@ phases:
       - npm run build
 artifacts:
   files:
-    - '**/*'
-  discard-paths: yes
+    - 'build/**/*'  # Ensure we are packaging the build directory contents
+    - 'build/**'     # This ensures all files inside 'build' are included
+  base-directory: build  # Ensure it points to the correct directory (where 'index.html' is)
