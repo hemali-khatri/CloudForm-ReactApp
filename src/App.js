@@ -17,7 +17,7 @@ const App = () => {
       } catch (err) {
         console.error('Failed to fetch users:', err);
         // Use fallback users or empty array if API/db is not available
-        setUsers();
+        setUsers([]);
         setError('Failed to load data from server. Showing fallback data.');
       } finally {
         setLoading(false);
@@ -40,20 +40,20 @@ const App = () => {
         </div>
       ) : null}
 
-      {users.length > 0 ? (
-        <ul className="user-list">
-          {users.map((user) => (
-            <li key={user.id} className="user-card">
-              <div className="user-info">
-                <h3 className="user-name">{user.name}</h3>
-                <p className="user-email">{user.email}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No users found</p>
-      )}
+      {Array.isArray(users) && users.length > 0 ? (
+  <ul className="user-list">
+    {users.map((user) => (
+      <li key={user.id} className="user-card">
+        <div className="user-info">
+          <h3 className="user-name">{user.name}</h3>
+          <p className="user-email">{user.email}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+) : (
+  <p>No users found</p>
+)}
     </div>
   );
 };
