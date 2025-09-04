@@ -2,7 +2,8 @@
 import axios from 'axios';
 
 //const apiUrl = 'http://localhost:3000/api/users';
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000/api/users';
+const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+const apiUrl = `${baseUrl}/api/users`;
 console.log("👉 React is calling API URL:", apiUrl);
 
 export const getUsers = async () => {
