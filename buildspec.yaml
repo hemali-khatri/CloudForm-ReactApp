@@ -8,6 +8,5 @@ phases:
       - npm run build
 artifacts:
   files:
-    - 'build/**/*'  # Ensure we are packaging the build directory contents
-    - 'build/**'     # This ensures all files inside 'build' are included
-  base-directory: build  # Ensure it points to the correct directory (where 'index.html' is)
+    - '**/*'   # include everything inside build
+  base-directory: build
